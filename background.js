@@ -1,6 +1,10 @@
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
-const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI;
-const SCOPES = 'user-modify-playback-state user-read-playback-state streaming user-read-private user-read-email';
+// Configuration - These placeholders will be replaced during build with actual values from .env
+const CLIENT_ID = '__SPOTIFY_CLIENT_ID__';
+const REDIRECT_URI = '__SPOTIFY_REDIRECT_URI__';
+const PERPLEXITY_API_KEY = '__PERPLEXITY_API_KEY__';
+const PERPLEXITY_MODEL = '__PERPLEXITY_MODEL__';
+const PERPLEXITY_SONGS_COUNT = __PERPLEXITY_SONGS_COUNT__;
+const SCOPES = '__SPOTIFY_SCOPES__';
 
 function base64urlencode(buffer) {
     return btoa(String.fromCharCode(...new Uint8Array(buffer)))
@@ -91,15 +95,15 @@ async function handleSpotifyAuth() {
 
 // Perplexity API integration
 async function getPerplexitySongs(query) {
-    const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY; // Replace with your API key
+    // const PERPLEXITY_API_KEY = import.meta.env.PERPLEXITY_API_KEY; // Replace with your API key
     
     try {
         const requestBody = {
-            model: process.env.PERPLEXITY_MODEL,
+            model: PERPLEXITY_MODEL,
             messages: [
                 {
                     role: 'user',
-                    content: `I need exactly ${process.env.PERPLEXITY_SONGS_COUNT} song recommendations based on: "${query}". Please format your response as a simple numbered list with each song on a new line in the format: "Artist - Song Title". Only provide the song list, no other text.`
+                    content: `I need exactly ${PERPLEXITY_SONGS_COUNT} song recommendations based on: "${query}". Please format your response as a simple numbered list with each song on a new line in the format: "Artist - Song Title". Only provide the song list, no other text.`
                 }
             ],
             max_tokens: 500,
@@ -149,7 +153,7 @@ async function getPerplexitySongs(query) {
             .filter(song => song.artist && song.title);
 
         console.log('Parsed songs:', songs);
-        return songs.slice(0, 10); // Ensure we only return 10 songs
+        return songs.slice(0, PERPLEXITY_SONGS_COUNT); // Return configured number of songs
     } catch (error) {
         console.error('Perplexity API error details:', error);
         
