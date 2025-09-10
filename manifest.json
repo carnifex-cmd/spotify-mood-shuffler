@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "Spotify Mood Shuffler",
+    "version": "1.0",
+    "permissions": ["identity", "storage", "activeTab"],
+    "host_permissions": [
+        "https://accounts.spotify.com/*",
+        "https://api.spotify.com/*",
+        "https://api.perplexity.ai/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "index.html"
+    }
+}
