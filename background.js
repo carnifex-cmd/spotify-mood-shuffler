@@ -95,7 +95,6 @@ async function handleSpotifyAuth() {
 
 // Perplexity API integration
 async function getPerplexitySongs(query) {
-    // const PERPLEXITY_API_KEY = import.meta.env.PERPLEXITY_API_KEY; // Replace with your API key
     
     try {
         const requestBody = {
