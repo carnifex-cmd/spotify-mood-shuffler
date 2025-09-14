@@ -20,6 +20,8 @@ const replacements = {
     '__SPOTIFY_CLIENT_ID__': { value: process.env.VITE_SPOTIFY_CLIENT_ID || 'YOUR_SPOTIFY_CLIENT_ID_HERE', templateVar: 'CLIENT_ID' },
     '__SPOTIFY_REDIRECT_URI__': { value: process.env.VITE_SPOTIFY_REDIRECT_URI || 'YOUR_SPOTIFY_REDIRECT_URI_HERE', templateVar: 'REDIRECT_URI' },
     '__PERPLEXITY_API_KEY__': { value: process.env.VITE_PERPLEXITY_API_KEY || 'YOUR_PERPLEXITY_API_KEY_HERE', templateVar: 'PERPLEXITY_API_KEY' },
+    '__GEMINI_API_KEY__': { value: process.env.VITE_GEMINI_API_KEY || 'YOUR_GEMINI_API_KEY_HERE', templateVar: 'GEMINI_API_KEY' },
+    '__GEMINI_SONGS_COUNT__': { value: process.env.VITE_GEMINI_SONGS_COUNT || '5', templateVar: 'GEMINI_SONGS_COUNT' },
     '__PERPLEXITY_MODEL__': { value: process.env.VITE_PERPLEXITY_MODEL || 'sonar', templateVar: 'PERPLEXITY_MODEL' },
     '__PERPLEXITY_SONGS_COUNT__': { value: process.env.VITE_PERPLEXITY_SONGS_COUNT || '10', templateVar: 'PERPLEXITY_SONGS_COUNT' },
     '__SPOTIFY_SCOPES__': { value: process.env.VITE_SPOTIFY_SCOPES || 'user-modify-playback-state user-read-playback-state streaming user-read-private user-read-email', templateVar: 'SCOPES' }
@@ -28,7 +30,7 @@ const replacements = {
 // Apply replacements
 for (const [placeholder, config] of Object.entries(replacements)) {
     // Handle string values (wrap in quotes) and template literals
-    if (placeholder === '__PERPLEXITY_SONGS_COUNT__') {
+    if (placeholder === '__PERPLEXITY_SONGS_COUNT__' || placeholder === '__GEMINI_SONGS_COUNT__') {
         // Numbers don't need quotes - handle quoted strings, template literals, and function arguments
         backgroundContent = backgroundContent.replace(new RegExp(`'${placeholder}'`, 'g'), config.value);
         backgroundContent = backgroundContent.replace(new RegExp(`\\$\\{${config.templateVar}\\}`, 'g'), config.value);

@@ -1,12 +1,12 @@
 
 // Orchestration
-export default function SearchAndPlayService(perplexityService, spotifyApi) {
+export default function SearchAndPlayService(aiService, spotifyApi) {
 	async function execute(query, accessToken) {
 		try {
 			console.log('=== Starting search and play process ===');
 			console.log('Query:', query);
-			console.log('Step 1: Getting recommendations from Perplexity...');
-			const songs = await perplexityService.getSongs(query);
+			console.log('Step 1: Getting recommendations from AI service...');
+			const songs = await aiService.getSongs(query);
 			if (!songs || songs.length === 0) {
 				throw new Error('No song recommendations found');
 			}
