@@ -31,16 +31,17 @@ const replacements = {
 
 // Apply replacements
 for (const [placeholder, config] of Object.entries(replacements)) {
-    // Handle string values (wrap in quotes) and template literals
+    // Handle different value types
     if (placeholder === '__PERPLEXITY_SONGS_COUNT__' || placeholder === '__GEMINI_SONGS_COUNT__') {
         // Numbers don't need quotes - handle quoted strings, template literals, and function arguments
         backgroundContent = backgroundContent.replace(new RegExp(`'${placeholder}'`, 'g'), config.value);
         backgroundContent = backgroundContent.replace(new RegExp(`\\$\\{${config.templateVar}\\}`, 'g'), config.value);
         backgroundContent = backgroundContent.replace(new RegExp(`\\b${config.templateVar}\\b`, 'g'), config.value);
     } else {
-        // Handle different contexts differently
+        // Handle string values differently based on context
         
-        // 1. Quoted placeholders should remain quoted
+        // 1. Replace direct placeholder references (like const AI_SERVICE = '__AI_SERVICE__')
+        backgroundContent = backgroundContent.replace(new RegExp(`"${placeholder}"`, 'g'), `"${config.value}"`);
         backgroundContent = backgroundContent.replace(new RegExp(`'${placeholder}'`, 'g'), `'${config.value}'`);
         
         // 2. Template literals should use raw values (no quotes needed)
