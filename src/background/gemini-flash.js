@@ -1,4 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
+import { FallbackSongs } from './fallback-songs.js';
 
 const ai = new GoogleGenAI({apiKey: `${GEMINI_API_KEY}`});
 
@@ -9,7 +10,7 @@ export default function GeminiFlashService() {
 
 			const response = await ai.models.generateContent({
 				model: `${GEMINI_MODEL}`,
-				contents: `Recommend exactly {GEMINI_SONGS_COUNT} songs based on: "${query}". 
+				contents: `Recommend exactly ${GEMINI_SONGS_COUNT} songs based on: "${query}". 
                 Format the response as a numbered list like:
                 1. Artist - Song Title
                 2. Artist - Song Title

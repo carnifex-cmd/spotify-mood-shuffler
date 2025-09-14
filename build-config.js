@@ -24,6 +24,8 @@ const replacements = {
     '__GEMINI_SONGS_COUNT__': { value: process.env.VITE_GEMINI_SONGS_COUNT || '5', templateVar: 'GEMINI_SONGS_COUNT' },
     '__PERPLEXITY_MODEL__': { value: process.env.VITE_PERPLEXITY_MODEL || 'sonar', templateVar: 'PERPLEXITY_MODEL' },
     '__PERPLEXITY_SONGS_COUNT__': { value: process.env.VITE_PERPLEXITY_SONGS_COUNT || '10', templateVar: 'PERPLEXITY_SONGS_COUNT' },
+    '__AI_SERVICE__': { value: process.env.VITE_AI_SERVICE || 'gemini', templateVar: 'AI_SERVICE' },
+    '__GEMINI_MODEL__': { value: process.env.VITE_GEMINI_MODEL || 'gemini-2.5-flash', templateVar: 'GEMINI_MODEL' },
     '__SPOTIFY_SCOPES__': { value: process.env.VITE_SPOTIFY_SCOPES || 'user-modify-playback-state user-read-playback-state streaming user-read-private user-read-email', templateVar: 'SCOPES' }
 };
 
